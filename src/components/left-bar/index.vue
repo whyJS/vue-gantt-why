@@ -7,7 +7,10 @@
 -->
 <template>
   <div class="gantt-leftbar">
-    <div class="gantt-leftbar-item gantt-block-top-space" :style="{ height: topSpace + 'px' }"></div>
+    <div
+      class="gantt-leftbar-item gantt-block-top-space"
+      :style="{ height: topSpace + 'px' }"
+    ></div>
     <div
       class="gantt-leftbar-item"
       :style="cellHeightStyle"
@@ -22,9 +25,9 @@
 </template>
 
 <script>
-import dr from '../dynamic-render.js'
+import dr from "../dynamic-render.js";
 export default {
-  name: 'LeftBar',
+  name: "LeftBar",
   mixins: [dr],
   props: {
     dataKey: String,
@@ -37,8 +40,8 @@ export default {
     cellHeightStyle() {
       return {
         height: `${this.cellHeight}px`
-      }
+      };
     }
   }
-}
+};
 </script>

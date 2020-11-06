@@ -54,8 +54,7 @@ const dynamicRender = {
     },
     showDatas() {
       const { startRenderNum, endRenderNum, datas } = this;
-      console.log('@@@@@@@@')
-      console.log(datas.slice(startRenderNum, endRenderNum))
+
       return datas.slice(startRenderNum, endRenderNum);
     },
     /**

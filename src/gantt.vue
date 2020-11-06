@@ -44,21 +44,31 @@
               :getPositonOffset="getPositonOffset"
             >
               <template v-slot="{ day, getTimeScales }">
-                <slot name="timeline" :day="day" :getTimeScales="getTimeScales"></slot>
+                <slot
+                  name="timeline"
+                  :day="day"
+                  :getTimeScales="getTimeScales"
+                ></slot>
               </template>
             </timeline>
           </div>
         </div>
       </div>
 
-      <div class="gantt-body" :style="{ height: `calc(100% - ${actualHeaderHeight}px)` }">
+      <div
+        class="gantt-body"
+        :style="{ height: `calc(100% - ${actualHeaderHeight}px)` }"
+      >
         <div class="gantt-table">
           <div
             ref="marklineArea"
             :style="{ marginLeft: titleWidth + 'px' }"
             class="gantt-markline-area"
           >
-            <CurrentTime v-if="showCurrentTime" :getPositonOffset="getPositonOffset" />
+            <CurrentTime
+              v-if="showCurrentTime"
+              :getPositonOffset="getPositonOffset"
+            />
             <mark-line
               v-for="(times, index) in timeLines"
               :key="index"
@@ -169,28 +179,28 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
-import ResizeObserver from 'resize-observer-polyfill'
+import dayjs from "dayjs";
+import ResizeObserver from "resize-observer-polyfill";
 import {
   scaleList,
   isDayScale,
   getBeginTimeOfTimeLine,
   calcScalesAbout2Times
-} from './utils/timeLineUtils.js'
-import { isDef, warn } from './utils/tool.js'
+} from "./utils/timeLineUtils.js";
+import { isDef, warn } from "./utils/tool.js";
 import {
   getPositonOffset as _getPositonOffset,
   getWidthAbout2Times as _getWidthAbout2Times
-} from './utils/gtUtils.js'
-import throttle from './utils/throttle.js'
-import Timeline from './components/time-line/index.vue'
-import CurrentTime from './components/mark-line/current-time.vue'
-import LeftBar from './components/left-bar/index.vue'
-import Blocks from './components/blocks/index.vue'
-import MarkLine from './components/mark-line/index.vue'
+} from "./utils/gtUtils.js";
+import throttle from "./utils/throttle.js";
+import Timeline from "./components/time-line/index.vue";
+import CurrentTime from "./components/mark-line/current-time.vue";
+import LeftBar from "./components/left-bar/index.vue";
+import Blocks from "./components/blocks/index.vue";
+import MarkLine from "./components/mark-line/index.vue";
 
 export default {
-  name: 'Gantt',
+  name: "Gantt",
 
   components: { Timeline, LeftBar, Blocks, MarkLine, CurrentTime },
 
@@ -198,17 +208,17 @@ export default {
     startTime: {
       default: () => dayjs(),
       validator(date) {
-        const ok = dayjs(date).isValid()
-        if (!ok) warn(`非法的开始时间 ${date}`)
-        return ok
+        const ok = dayjs(date).isValid();
+        if (!ok) warn(`非法的开始时间 ${date}`);
+        return ok;
       }
     },
     endTime: {
       default: () => dayjs(),
       validator(date) {
-        const ok = dayjs(date).isValid()
-        if (!ok) warn(`非法的结束时间 ${date}`)
-        return ok
+        const ok = dayjs(date).isValid();
+        if (!ok) warn(`非法的结束时间 ${date}`);
+        return ok;
       }
     },
     cellWidth: {
@@ -231,7 +241,7 @@ export default {
       type: Number,
       default: 60,
       validator(value) {
-        return scaleList.includes(value) || isDayScale(value)
+        return scaleList.includes(value) || isDayScale(value);
       }
     },
     datas: {
@@ -259,18 +269,18 @@ export default {
     },
     scrollToTime: {
       validator(date) {
-        return dayjs(date).isValid()
+        return dayjs(date).isValid();
       }
     },
     scrollToPostion: {
       validator(obj) {
-        const validX = isDef(obj.x) ? !Number.isNaN(obj.x) : true
-        const validY = isDef(obj.y) ? !Number.isNaN(obj.y) : true
+        const validX = isDef(obj.x) ? !Number.isNaN(obj.x) : true;
+        const validY = isDef(obj.y) ? !Number.isNaN(obj.y) : true;
         if (!validX && !validY) {
-          warn('scrollToPostion x或y 有值为非Number类型')
-          return false
+          warn("scrollToPostion x或y 有值为非Number类型");
+          return false;
         }
-        return true
+        return true;
       }
     },
     hideHeader: {
@@ -321,12 +331,12 @@ export default {
         x: 0,
         y: 0
       }
-    }
+    };
   },
 
   computed: {
     start() {
-      return dayjs(this.startTime)
+      return dayjs(this.startTime);
     },
     end() {
       const {
@@ -335,9 +345,9 @@ export default {
         scale,
         cellWidth,
         timeRangeCorrection
-      } = this
-      let end = dayjs(this.endTime)
-      const totalWidth = calcScalesAbout2Times(start, end, scale) * cellWidth
+      } = this;
+      let end = dayjs(this.endTime);
+      const totalWidth = calcScalesAbout2Times(start, end, scale) * cellWidth;
       // 时间纠正和补偿
       if (
         timeRangeCorrection &&
@@ -345,62 +355,62 @@ export default {
       ) {
         end = getBeginTimeOfTimeLine(start, scale).add(
           (widthOfBlocksWrapper / cellWidth) * scale,
-          'minute'
-        )
+          "minute"
+        );
       }
-      return end
+      return end;
     },
     totalWidth() {
-      const { cellWidth, totalScales } = this
-      return cellWidth * totalScales
+      const { cellWidth, totalScales } = this;
+      return cellWidth * totalScales;
     },
     totalScales() {
-      const { start, end, scale } = this
-      return calcScalesAbout2Times(start, end, scale)
+      const { start, end, scale } = this;
+      return calcScalesAbout2Times(start, end, scale);
     },
     totalHeight() {
-      const { datas, cellHeight } = this
-      return datas.length * cellHeight
+      const { datas, cellHeight } = this;
+      return datas.length * cellHeight;
     },
     beginTimeOfTimeLine() {
-      const value = getBeginTimeOfTimeLine(this.start, this.scale)
-      return value
+      const value = getBeginTimeOfTimeLine(this.start, this.scale);
+      return value;
     },
     beginTimeOfTimeLineToString() {
-      return this.beginTimeOfTimeLine.toString()
+      return this.beginTimeOfTimeLine.toString();
     },
     avialableScrollLeft() {
       // 不减这个1，滚动到时间轴尽头后继续滚动会慢慢的溢出
-      const { totalWidth, widthOfBlocksWrapper } = this
-      return totalWidth - widthOfBlocksWrapper - 1
+      const { totalWidth, widthOfBlocksWrapper } = this;
+      return totalWidth - widthOfBlocksWrapper - 1;
     },
     avialableScrollTop() {
-      const { totalHeight, heightOfBlocksWrapper } = this
-      return totalHeight - heightOfBlocksWrapper - 1
+      const { totalHeight, heightOfBlocksWrapper } = this;
+      return totalHeight - heightOfBlocksWrapper - 1;
     },
     scrollXBarHeight() {
-      return this.hideXScrollBar ? 0 : this.scrollBarWitdh
+      return this.hideXScrollBar ? 0 : this.scrollBarWitdh;
     },
     scrollYBarWidth() {
-      return this.hideYScrollBar ? 0 : this.scrollBarWitdh
+      return this.hideYScrollBar ? 0 : this.scrollBarWitdh;
     },
     actualHeaderHeight() {
-      return this.hideHeader ? 0 : this.titleHeight
+      return this.hideHeader ? 0 : this.titleHeight;
     },
     startTimeOfRenderArea() {
       if (this.heightOfBlocksWrapper === 0) {
-        return
+        return;
       }
-      const { beginTimeOfTimeLine, scrollLeft, cellWidth, scale } = this
+      const { beginTimeOfTimeLine, scrollLeft, cellWidth, scale } = this;
 
       return beginTimeOfTimeLine
-        .add((scrollLeft / cellWidth) * scale, 'minute')
+        .add((scrollLeft / cellWidth) * scale, "minute")
         .toDate()
-        .getTime()
+        .getTime();
     },
     endTimeOfRenderArea() {
       if (this.heightOfBlocksWrapper === 0) {
-        return
+        return;
       }
       const {
         beginTimeOfTimeLine,
@@ -409,15 +419,15 @@ export default {
         scale,
         widthOfBlocksWrapper,
         totalWidth
-      } = this
+      } = this;
 
       const renderWidth =
-        totalWidth < widthOfBlocksWrapper ? totalWidth : widthOfBlocksWrapper
+        totalWidth < widthOfBlocksWrapper ? totalWidth : widthOfBlocksWrapper;
 
       return beginTimeOfTimeLine
-        .add(((scrollLeft + renderWidth) / cellWidth) * scale, 'minute')
+        .add(((scrollLeft + renderWidth) / cellWidth) * scale, "minute")
         .toDate()
-        .getTime()
+        .getTime();
     }
   },
 
@@ -425,31 +435,31 @@ export default {
     scrollToTime: {
       handler(newV) {
         if (!newV) {
-          return
+          return;
         }
-        const { start, end } = this
-        const time = dayjs(newV)
+        const { start, end } = this;
+        const time = dayjs(newV);
         if (!(time.isAfter(start) && time.isBefore(end))) {
-          warn(`当前滚动至${newV}不在${start}和${end}的范围之内`)
-          return
+          warn(`当前滚动至${newV}不在${start}和${end}的范围之内`);
+          return;
         }
-        const offset = this.getPositonOffset(newV)
-        this.$nextTick(this.manualScroll(offset))
+        const offset = this.getPositonOffset(newV);
+        this.$nextTick(this.manualScroll(offset));
       },
       immediate: true
     },
     scrollToPostion: {
       handler(newV) {
         if (!newV) {
-          return
+          return;
         }
-        const x = Number.parseFloat(newV.x)
-        const y = Number.parseFloat(newV.y)
+        const x = Number.parseFloat(newV.x);
+        const y = Number.parseFloat(newV.y);
         if (!Number.isNaN(x) && x !== this.scrollLeft) {
-          this.$nextTick(this.manualScroll(x))
+          this.$nextTick(this.manualScroll(x));
         }
         if (!Number.isNaN(y) && y !== this.scrollTop) {
-          this.$nextTick(this.manualScroll(undefined, y))
+          this.$nextTick(this.manualScroll(undefined, y));
         }
       },
       immediate: true
@@ -457,48 +467,48 @@ export default {
   },
 
   mounted() {
-    this.cacheSelector()
+    this.cacheSelector();
     // 计算准确的渲染区域范围
     const observeContainer = throttle(entries => {
       entries.forEach(entry => {
-        const cr = entry.contentRect
-        this.heightOfBlocksWrapper = cr.height
-        this.widthOfBlocksWrapper = cr.width
-      })
-    })
-    const observer = new ResizeObserver(observeContainer)
-    observer.observe(this.$refs.blocksWrapper)
-    this.$once('hook:beforeDestroy', () => {
-      observer.disconnect()
-      this.releaseSelector()
-    })
+        const cr = entry.contentRect;
+        this.heightOfBlocksWrapper = cr.height;
+        this.widthOfBlocksWrapper = cr.width;
+      });
+    });
+    const observer = new ResizeObserver(observeContainer);
+    observer.observe(this.$refs.blocksWrapper);
+    this.$once("hook:beforeDestroy", () => {
+      observer.disconnect();
+      this.releaseSelector();
+    });
   },
 
   methods: {
     touchMoveHandle(e) {
-      const finger = e.touches[0]
+      const finger = e.touches[0];
       this.wheelHandle({
         deltaX: this.preTouchPosition.x - finger.screenX,
         deltaY: this.preTouchPosition.y - finger.screenY
-      })
-      this.preTouchPosition.x = finger.screenX
-      this.preTouchPosition.y = finger.screenY
+      });
+      this.preTouchPosition.x = finger.screenX;
+      this.preTouchPosition.y = finger.screenY;
     },
     touchStartHandle(e) {
-      const finger = e.touches[0]
-      this.preTouchPosition.x = finger.screenX
-      this.preTouchPosition.y = finger.screenY
+      const finger = e.touches[0];
+      this.preTouchPosition.x = finger.screenX;
+      this.preTouchPosition.y = finger.screenY;
     },
     touchEndHandle() {
-      this.preTouchPosition.x = 0
-      this.preTouchPosition.y = 0
+      this.preTouchPosition.x = 0;
+      this.preTouchPosition.y = 0;
     },
     getWidthAbout2Times(start, end) {
       const options = {
         scale: this.scale,
         cellWidth: this.cellWidth
-      }
-      return _getWidthAbout2Times(start, end, options)
+      };
+      return _getWidthAbout2Times(start, end, options);
     },
     /**
      * 为时间线计算偏移
@@ -507,44 +517,44 @@ export default {
       const options = {
         scale: this.scale,
         cellWidth: this.cellWidth
-      }
+      };
 
-      return _getPositonOffset(date, this.beginTimeOfTimeLineToString, options)
+      return _getPositonOffset(date, this.beginTimeOfTimeLineToString, options);
     },
     //缓存节点
     cacheSelector() {
-      this.selector.gantt_leftbar = this.$refs.leftbarWrapper
-      this.selector.gantt_table = this.$refs.blocksWrapper
-      this.selector.gantt_scroll_y = this.$refs.scrollYBar
-      this.selector.gantt_timeline = this.$refs.headerTimeline
-      this.selector.gantt_scroll_x = this.$refs.scrollXBar
-      this.selector.gantt_markArea = this.$refs.marklineArea
+      this.selector.gantt_leftbar = this.$refs.leftbarWrapper;
+      this.selector.gantt_table = this.$refs.blocksWrapper;
+      this.selector.gantt_scroll_y = this.$refs.scrollYBar;
+      this.selector.gantt_timeline = this.$refs.headerTimeline;
+      this.selector.gantt_scroll_x = this.$refs.scrollXBar;
+      this.selector.gantt_markArea = this.$refs.marklineArea;
     },
     releaseSelector() {
-      let key
+      let key;
       for (key in this.selector) {
-        this.selector[key] = null
+        this.selector[key] = null;
       }
     },
     wheelHandle(event) {
-      const { deltaX, deltaY } = event
+      const { deltaX, deltaY } = event;
       const {
         scrollTop,
         scrollLeft,
         avialableScrollLeft,
         avialableScrollTop
-      } = this
+      } = this;
 
       if (deltaY !== 0) {
         if (
           scrollTop + deltaY >= avialableScrollTop &&
           scrollTop !== avialableScrollTop
         ) {
-          this.manualScroll(undefined, avialableScrollTop)
+          this.manualScroll(undefined, avialableScrollTop);
         } else if (scrollTop + deltaY < 0 && scrollTop !== 0 /*滚动为0限制*/) {
-          this.manualScroll(undefined, 0)
+          this.manualScroll(undefined, 0);
         } else {
-          this.manualScroll(undefined, scrollTop + deltaY)
+          this.manualScroll(undefined, scrollTop + deltaY);
         }
       }
       if (deltaX !== 0) {
@@ -552,45 +562,45 @@ export default {
           scrollLeft + deltaX >= avialableScrollLeft &&
           scrollLeft !== avialableScrollLeft
         ) {
-          this.manualScroll(avialableScrollLeft)
+          this.manualScroll(avialableScrollLeft);
         } else if (
           scrollLeft + deltaX < 0 &&
           scrollLeft !== 0 /*滚动为0限制*/
         ) {
-          this.manualScroll(0)
+          this.manualScroll(0);
         } else {
-          this.manualScroll(scrollLeft + deltaX)
+          this.manualScroll(scrollLeft + deltaX);
         }
       }
     },
     manualScroll(x, y) {
       if (x != undefined) {
-        this.selector.gantt_scroll_x.scrollLeft = x
+        this.selector.gantt_scroll_x.scrollLeft = x;
       }
       if (y != undefined) {
-        this.selector.gantt_scroll_y.scrollTop = y
+        this.selector.gantt_scroll_y.scrollTop = y;
       }
     },
     //同步fixleft和block的滚动
     syncScrollY(event) {
-      const { gantt_leftbar, gantt_table } = this.selector
-      const topValue = event.target.scrollTop
-      this.scrollTop = gantt_table.scrollTop = gantt_leftbar.scrollTop = topValue
-      this.$emit('scrollTop', topValue)
+      const { gantt_leftbar, gantt_table } = this.selector;
+      const topValue = event.target.scrollTop;
+      this.scrollTop = gantt_table.scrollTop = gantt_leftbar.scrollTop = topValue;
+      this.$emit("scrollTop", topValue);
     },
     syncScrollX(event) {
-      const { gantt_table, gantt_timeline, gantt_markArea } = this.selector
-      const leftValue = event.target.scrollLeft
-      this.scrollLeft = gantt_timeline.scrollLeft = gantt_table.scrollLeft = leftValue
-      gantt_markArea.style.left = -leftValue + 'px'
-      this.$emit('scrollLeft', leftValue)
+      const { gantt_table, gantt_timeline, gantt_markArea } = this.selector;
+      const leftValue = event.target.scrollLeft;
+      this.scrollLeft = gantt_timeline.scrollLeft = gantt_table.scrollLeft = leftValue;
+      gantt_markArea.style.left = -leftValue + "px";
+      this.$emit("scrollLeft", leftValue);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-@import './gantt.scss';
+@import "./gantt.scss";
 .gantt-header-title {
   background: #fff;
 

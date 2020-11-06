@@ -1,6 +1,9 @@
 <template>
   <div class="gantt-blocks" :style="{ height: blockHeight + 'px' }">
-    <div class="gantt-block gantt-block-top-space" :style="{ height: topSpace + 'px' }"></div>
+    <div
+      class="gantt-block gantt-block-top-space"
+      :style="{ height: topSpace + 'px' }"
+    ></div>
     <div
       class="gantt-block"
       :style="blockStyle"
@@ -12,17 +15,17 @@
           <template v-for="(item, index) in concatArray(data)">
             <div
               v-if="
-              isInRenderingTimeRangeOrIsAcrossRenderingTimeRange(
-                item.start,
-                item.end
-              )
-            "
+                isInRenderingTimeRangeOrIsAcrossRenderingTimeRange(
+                  item.start,
+                  item.end
+                )
+              "
               class="gantt-block-item"
               :key="itemKey ? item[itemKey] : index"
               :style="{
-              left: getPosition(item) + 'px',
-              width: getWidth(item) + 'px'
-            }"
+                left: getPosition(item) + 'px',
+                width: getWidth(item) + 'px'
+              }"
             >
               <slot :data="data" :item="item">
                 <div class="gantt-block-defaultBlock">need slot</div>
@@ -38,7 +41,8 @@
             :getWidthAbout2Times="getWidthAbout2Times"
             :isInRenderingTimeRange="isInRenderingTimeRange"
             :isAcrossRenderingTimeRange="isAcrossRenderingTimeRange"
-          >need slot</slot>
+            >need slot</slot
+          >
         </template>
       </div>
 
@@ -47,18 +51,18 @@
           <template v-for="(item, index) in concatArray2(data)">
             <div
               v-if="
-              isInRenderingTimeRangeOrIsAcrossRenderingTimeRange(
-                item.start,
-                item.end
-              )
-            "
+                isInRenderingTimeRangeOrIsAcrossRenderingTimeRange(
+                  item.start,
+                  item.end
+                )
+              "
               data-aa="asd"
               class="gantt-block-item"
               :key="itemKey ? item[itemKey] : index"
               :style="{
-              left: getPosition(item) + 'px',
-              width: getWidth(item) + 'px'
-            }"
+                left: getPosition(item) + 'px',
+                width: getWidth(item) + 'px'
+              }"
             >
               <slot :data="data" :item="item">
                 <div class="gantt-block-defaultBlock">need slot</div>
@@ -74,7 +78,8 @@
             :getWidthAbout2Times="getWidthAbout2Times"
             :isInRenderingTimeRange="isInRenderingTimeRange"
             :isAcrossRenderingTimeRange="isAcrossRenderingTimeRange"
-          >need slot</slot>
+            >need slot</slot
+          >
         </template>
       </div>
     </div>
@@ -82,11 +87,11 @@
 </template>
 
 <script>
-import dr from '../dynamic-render.js'
-import { isUndef, warn } from '../../utils/tool.js'
+import dr from "../dynamic-render.js";
+import { isUndef, warn } from "../../utils/tool.js";
 
 export default {
-  name: 'Blocks',
+  name: "Blocks",
   mixins: [dr],
   props: {
     dataKey: String,
@@ -115,26 +120,26 @@ export default {
   },
   computed: {
     renderAarrys() {
-      const { arrayKeys } = this
-      console.log(arrayKeys)
+      const { arrayKeys } = this;
+
       if (arrayKeys.length > 0) {
-        return arrayKeys
+        return arrayKeys;
       }
-      return ['gtArray']
+      return ["gtArray"];
     },
     blockStyle() {
       return {
         backgroundSize: `${this.cellWidth}px ${this.cellHeight}px`,
         height: `${this.cellHeight}px`
         // paddingTop: `${this.cellHeight / 3}px`
-      }
+      };
     },
     blockStyle2() {
       return {
         // backgroundSize: `${this.cellWidth}px ${this.cellHeight}px`,
         height: `13px`,
-        paddingTop: '20px'
-      }
+        paddingTop: "20px"
+      };
     }
   },
 
@@ -148,21 +153,21 @@ export default {
     concatArray(data) {
       return this.renderAarrys.reduce((prev, curr) => {
         if (Array.isArray(data[curr])) {
-          return prev.concat(data[curr])
+          return prev.concat(data[curr]);
         } else {
-          return prev
+          return prev;
         }
-      }, [])
+      }, []);
     },
 
     concatArray2(data) {
-      return ['gtArray2'].reduce((prev, curr) => {
+      return ["gtArray2"].reduce((prev, curr) => {
         if (Array.isArray(data[curr])) {
-          return prev.concat(data[curr])
+          return prev.concat(data[curr]);
         } else {
-          return prev
+          return prev;
         }
-      }, [])
+      }, []);
     },
     /**
      * 判定时间段是否跨越了渲染的时间范围 或者判定时间是否在渲染的时间范围内
@@ -173,35 +178,35 @@ export default {
      */
     isInRenderingTimeRangeOrIsAcrossRenderingTimeRange(timeStart, timeEnd) {
       if (this.heightOfBlocksWrapper === 0) {
-        return false
+        return false;
       }
 
-      const { startTimeOfRenderArea, endTimeOfRenderArea } = this
+      const { startTimeOfRenderArea, endTimeOfRenderArea } = this;
       if (isUndef(startTimeOfRenderArea) || isUndef(endTimeOfRenderArea)) {
-        return false
+        return false;
       }
 
-      const timeStartToMs = new Date(timeStart).getTime()
-      const timeEndToMs = new Date(timeEnd).getTime()
+      const timeStartToMs = new Date(timeStart).getTime();
+      const timeEndToMs = new Date(timeEnd).getTime();
       if (
         startTimeOfRenderArea >= timeStartToMs &&
         timeEndToMs >= endTimeOfRenderArea
       ) {
-        return true
+        return true;
       }
       if (
         startTimeOfRenderArea <= timeStartToMs &&
         timeStartToMs <= endTimeOfRenderArea
       ) {
-        return true
+        return true;
       }
       if (
         startTimeOfRenderArea <= timeEndToMs &&
         timeEndToMs <= endTimeOfRenderArea
       ) {
-        return true
+        return true;
       }
-      return false
+      return false;
     },
     /**
      * 判定时间是否在渲染的时间范围内
@@ -211,22 +216,22 @@ export default {
      */
     isInRenderingTimeRange(time) {
       if (this.heightOfBlocksWrapper === 0) {
-        return false
+        return false;
       }
 
-      const { startTimeOfRenderArea, endTimeOfRenderArea } = this
+      const { startTimeOfRenderArea, endTimeOfRenderArea } = this;
       if (isUndef(startTimeOfRenderArea) || isUndef(endTimeOfRenderArea)) {
-        return false
+        return false;
       }
 
-      const timeToMs = new Date(time).getTime()
+      const timeToMs = new Date(time).getTime();
       if (
         startTimeOfRenderArea <= timeToMs &&
         timeToMs <= endTimeOfRenderArea
       ) {
-        return true
+        return true;
       }
-      return false
+      return false;
     },
     /**
      * 判定时间段是否跨越了渲染的时间范围
@@ -237,23 +242,23 @@ export default {
      */
     isAcrossRenderingTimeRange(timeStart, timeEnd) {
       if (this.heightOfBlocksWrapper === 0) {
-        return false
+        return false;
       }
 
-      const { startTimeOfRenderArea, endTimeOfRenderArea } = this
+      const { startTimeOfRenderArea, endTimeOfRenderArea } = this;
       if (isUndef(startTimeOfRenderArea) || isUndef(endTimeOfRenderArea)) {
-        return false
+        return false;
       }
 
-      const timeStartToMs = new Date(timeStart).getTime()
-      const timeEndToMs = new Date(timeEnd).getTime()
+      const timeStartToMs = new Date(timeStart).getTime();
+      const timeEndToMs = new Date(timeEnd).getTime();
       if (
         startTimeOfRenderArea >= timeStartToMs &&
         timeEndToMs >= endTimeOfRenderArea
       ) {
-        return true
+        return true;
       }
-      return false
+      return false;
     },
     /**
      * 计算时间块长度
@@ -264,10 +269,10 @@ export default {
     getWidth(block) {
       if (isUndef(block.start) || isUndef(block.end)) {
         // warn(`错误，该数据项不含start值 与 end 值 ${JSON.stringify(block)}，无法计算宽度值。`)
-        return 0
+        return 0;
       }
 
-      return this.getWidthAbout2Times(block.start, block.end)
+      return this.getWidthAbout2Times(block.start, block.end);
     },
     /**
      * 计算时间块偏移
@@ -281,17 +286,17 @@ export default {
           `错误，该数据项不含start 值 ${JSON.stringify(
             block
           )}，无法计算偏移值。`
-        )
-        return 0
+        );
+        return 0;
       }
 
-      return this.getPositonOffset(block.start)
+      return this.getPositonOffset(block.start);
     }
   }
-}
+};
 </script>
 
-<style  scoped>
+<style scoped>
 .top_class1 {
   height: 13px;
   padding-top: 60px;

@@ -39,8 +39,6 @@ export default {
   mounted() {},
   computed: {
     statusColor() {
-      console.log('asasasa')
-      console.log(this)
       let { item, currentTime } = this
       let start = dayjs(item.start)
       let end = dayjs(item.end)

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="container">
-      <v-gantt-chart
+      <v-gantt-why
         :startTime="times[0]"
         :endTime="times[1]"
         :cellWidth="cellWidth"
@@ -34,7 +34,7 @@
           <TestTimeline :day="day" :getTimeScales="getTimeScales"></TestTimeline>
         </template>-->
         <template v-slot:title>项目1</template>
-      </v-gantt-chart>
+      </v-gantt-why>
     </div>
   </div>
 </template>
@@ -122,8 +122,6 @@ export default {
   },
   methods: {
     updateData() {
-      console.log(new Date('Thu, 05 Nov 2020 12:01:26 GMT'))
-
       const json = [
         {
           id: 'JHR768UQ',

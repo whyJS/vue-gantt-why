@@ -3,7 +3,7 @@
  * @Author: whyjs
  * @Date: 2020-07-19 03:18:56
  * @LastEditors: whyjs
- * @LastEditTime: 2020-11-06 14:56:43
+ * @LastEditTime: 2020-11-06 15:38:45
 -->
 <template>
   <div class="name">
@@ -20,10 +20,7 @@ export default {
   props: {
     data: Object
   },
-  mounted() {
-    console.log('******')
-    console.log(this.data)
-  }
+  mounted() {}
 }
 </script>
 
