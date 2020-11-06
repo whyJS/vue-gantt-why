@@ -1,33 +1,25 @@
 {
-  "name": "v-gantt-chart",
-  "version": "1.5.0",
-  "description": "display gantt-like vaule,like use this to order bus schedule.",
-  "main": "dist/v-gantt-chart.js",
+  "name": "v-gantt-why",
+  "version": "1.0.0",
+  "description": "vue甘特图",
+  "main": "dist/v-gantt-why.js",
   "files": [
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/w1301625107/Vue-Gantt-chart.git"
-  },
-  "bugs": {
-    "url": "https://github.com/w1301625107/Vue-Gantt-chart/issues"
-  },
-  "homepage": "https://github.com/w1301625107/Vue-Gantt-chart#readme",
   "keywords": [
     "vue-gantt-chart",
     "gantt",
     "gantt-chart",
     "v-gantt-chart"
   ],
-  "author": "wuchouchou",
+  "author": "why3935308@163.com",
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "npm run lint --fix && NODE_ENV=DEMO vue-cli-service build ",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "libbuild": "npm run lint  --fix && vue-cli-service build --target lib --name v-gantt-chart src/index.js"
+    "libbuild": "npm run lint  --fix && vue-cli-service build --target lib --name v-gantt-why src/index.js"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
