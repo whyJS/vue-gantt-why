@@ -14,7 +14,7 @@
       >
         <slot :day="day" :getTimeScales="getTimeScales">
           <div class="gantt-timeline-day" :style="heightStyle">
-            {{ day.format("MM/DD") }}
+            {{ day.format("YYYY-MM-DD") }}
           </div>
           <div
             v-if="!isDayScale"
@@ -26,7 +26,7 @@
               v-for="(time, index) in getTimeScales(day)"
               :key="index"
             >
-              {{ scale >= 60 ? time.format("HH") : time.format("HH:mm") }}
+              {{ time.format("HH:mm") }}
             </div>
           </div>
         </slot>

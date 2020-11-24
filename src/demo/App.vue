@@ -48,7 +48,7 @@ import dayjs from 'dayjs'
 
 const scaleList = `1,2,3,4,5,6,10,12,15,20,30,60,120,180,240,360,720,1440,2880,4320`
   .split(',')
-  .map(n => {
+  .map((n) => {
     let value = parseInt(n)
     let label
     if (value < 60) {
@@ -60,7 +60,7 @@ const scaleList = `1,2,3,4,5,6,10,12,15,20,30,60,120,180,240,360,720,1440,2880,4
     }
     return {
       value,
-      label
+      label,
     }
   })
 export default {
@@ -70,26 +70,22 @@ export default {
     return {
       timeLines: [
         {
-          time: dayjs()
-            .add(2, 'hour')
-            .toString()
+          time: dayjs().add(2, 'hour').toString(),
         },
         {
-          time: dayjs()
-            .add(5, 'hour')
-            .toString(),
-          color: '#747e80'
-        }
+          time: dayjs().add(5, 'hour').toString(),
+          color: '#747e80',
+        },
       ],
       currentTime: dayjs(),
       cellWidth: 100,
       cellHeight: 106,
       titleHeight: 50,
       titleWidth: 380,
-      scale: 60,
+      scale: 30,
       times: [
         dayjs('2020-01-01 01:00:00').toString(),
-        dayjs('2020-01-02 01:00:00').toString()
+        dayjs('2020-01-02 01:00:00').toString(),
       ],
       rowNum: 100,
       colNum: 10,
@@ -97,16 +93,14 @@ export default {
       datasB: [],
       dataKey: 'id',
       scaleList: scaleList,
-      scrollToTime: dayjs()
-        .add(1, 'day')
-        .toString(),
+      scrollToTime: dayjs().add(1, 'day').toString(),
       scrollToPostion: { x: 10000, y: 10000 },
       hideHeader: false,
       hideSecondGantt: false,
       arrayKeys: ['gtArray', 'error'],
       scrollToY: 0,
       positionB: {},
-      positionA: {}
+      positionA: {},
     }
   },
   watch: {
@@ -115,7 +109,7 @@ export default {
     times: 'updateData',
     scrollToY(val) {
       this.positionA = { x: val }
-    }
+    },
   },
   mounted() {
     this.updateData()
@@ -131,30 +125,30 @@ export default {
               id: 'YY42862',
               color: '#77AFF6',
               start: dayjs('2020-01-01 01:00:00').toString(),
-              end: dayjs('2020-01-01 08:00:00').toString()
+              end: dayjs('2020-01-01 08:00:00').toString(),
             },
             {
               id: 'YY42863',
               color: '#77AFF6',
               start: dayjs('2020-01-01 12:00:00').toString(),
-              end: dayjs('2020-01-01 18:00:00').toString()
-            }
+              end: dayjs('2020-01-01 18:00:00').toString(),
+            },
           ],
           gtArray2: [
             {
               id: 'YY42862dd',
               color: '#9DDAB4',
               start: dayjs('2020-01-01 01:00:00').toString(),
-              end: dayjs('2020-01-01 04:00:00').toString()
+              end: dayjs('2020-01-01 04:00:00').toString(),
             },
             {
               id: 'YY42864',
               color: '#9DDAB4',
               start: dayjs('2020-01-01 12:00:00').toString(),
-              end: dayjs('2020-01-01 18:00:00').toString()
-            }
-          ]
-        }
+              end: dayjs('2020-01-01 18:00:00').toString(),
+            },
+          ],
+        },
         // {
         //   id: 'JHR768UQ2',
         //   name: '霹雳火神号',
@@ -188,12 +182,12 @@ export default {
     updateTimeLines(timeA, timeB) {
       this.timeLines = [
         {
-          time: timeA
+          time: timeA,
         },
         {
           time: timeB,
-          color: '#747e80'
-        }
+          color: '#747e80',
+        },
       ]
     },
     scrollLeftA(val) {
@@ -201,8 +195,8 @@ export default {
     },
     scrollLeftB(val) {
       this.positionA = { x: val }
-    }
-  }
+    },
+  },
 }
 </script>
 
