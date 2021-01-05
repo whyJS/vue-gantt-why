@@ -78,7 +78,7 @@ export default {
         },
       ],
       currentTime: dayjs(),
-      cellWidth: 100,
+      cellWidth: 10,
       cellHeight: 106,
       titleHeight: 50,
       titleWidth: 380,

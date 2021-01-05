@@ -26,7 +26,7 @@
               v-for="(time, index) in getTimeScales(day)"
               :key="index"
             >
-              {{ time.format("HH:mm") }}
+              <!-- {{ time.format("HH:mm") }}111 -->
             </div>
           </div>
         </slot>

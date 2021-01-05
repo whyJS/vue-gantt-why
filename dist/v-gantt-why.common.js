@@ -2409,12 +2409,12 @@ function throttle(fn) {
     }, interval);
   };
 }
-// CONCATENATED MODULE: ./node_modules/_cache-loader@4.1.0@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"397cdb78-vue-loader-template"}!./node_modules/_vue-loader@15.9.5@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@4.1.0@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.5@vue-loader/lib??vue-loader-options!./src/components/time-line/index.vue?vue&type=template&id=1824ebdf&
-var time_linevue_type_template_id_1824ebdf_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-timeline",style:({ 'margin-left': -_vm.cellWidth / 2 + 'px' })},[(_vm.lazy)?_c('div',{staticClass:"gantt-timeline-padding_block",style:({ width: _vm.paddingWidth + 'px' })}):_vm._e(),_vm._l((_vm.allDayBlocks),function(day,index){return [(!_vm.lazy || _vm.isInRenderingDayRange(day))?_c('div',{key:index,staticClass:"gantt-timeline-block",style:({ width: _vm.getTimeScales(day).length * _vm.cellWidth + 'px' })},[_vm._t("default",[_c('div',{staticClass:"gantt-timeline-day",style:(_vm.heightStyle)},[_vm._v(" "+_vm._s(day.format("YYYY-MM-DD"))+" ")]),(!_vm.isDayScale)?_c('div',{staticClass:"gantt-timeline-scale",style:(_vm.heightStyle)},_vm._l((_vm.getTimeScales(day)),function(time,index){return _c('div',{key:index,style:(_vm.cellWidthStyle)},[_vm._v(" "+_vm._s(time.format("HH:mm"))+" ")])}),0):_vm._e()],{"day":day,"getTimeScales":_vm.getTimeScales})],2):_vm._e()]})],2)}
-var time_linevue_type_template_id_1824ebdf_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/_cache-loader@4.1.0@cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"397cdb78-vue-loader-template"}!./node_modules/_vue-loader@15.9.5@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_cache-loader@4.1.0@cache-loader/dist/cjs.js??ref--0-0!./node_modules/_vue-loader@15.9.5@vue-loader/lib??vue-loader-options!./src/components/time-line/index.vue?vue&type=template&id=46bb0151&
+var time_linevue_type_template_id_46bb0151_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"gantt-timeline",style:({ 'margin-left': -_vm.cellWidth / 2 + 'px' })},[(_vm.lazy)?_c('div',{staticClass:"gantt-timeline-padding_block",style:({ width: _vm.paddingWidth + 'px' })}):_vm._e(),_vm._l((_vm.allDayBlocks),function(day,index){return [(!_vm.lazy || _vm.isInRenderingDayRange(day))?_c('div',{key:index,staticClass:"gantt-timeline-block",style:({ width: _vm.getTimeScales(day).length * _vm.cellWidth + 'px' })},[_vm._t("default",[_c('div',{staticClass:"gantt-timeline-day",style:(_vm.heightStyle)},[_vm._v(" "+_vm._s(day.format("YYYY-MM-DD"))+" ")]),(!_vm.isDayScale)?_c('div',{staticClass:"gantt-timeline-scale",style:(_vm.heightStyle)},_vm._l((_vm.getTimeScales(day)),function(time,index){return _c('div',{key:index,style:(_vm.cellWidthStyle)})}),0):_vm._e()],{"day":day,"getTimeScales":_vm.getTimeScales})],2):_vm._e()]})],2)}
+var time_linevue_type_template_id_46bb0151_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/time-line/index.vue?vue&type=template&id=1824ebdf&
+// CONCATENATED MODULE: ./src/components/time-line/index.vue?vue&type=template&id=46bb0151&
 
 // EXTERNAL MODULE: ./node_modules/_core-js@3.6.5@core-js/modules/es.symbol.js
 var es_symbol = __webpack_require__("f3dd");
@@ -2788,8 +2788,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_time_linevue_type_script_lang_js_,
-  time_linevue_type_template_id_1824ebdf_render,
-  time_linevue_type_template_id_1824ebdf_staticRenderFns,
+  time_linevue_type_template_id_46bb0151_render,
+  time_linevue_type_template_id_46bb0151_staticRenderFns,
   false,
   null,
   null,
